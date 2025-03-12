@@ -1,0 +1,16 @@
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\bin\Debug\net8.0\Academy.Application.deps.json
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\bin\Debug\net8.0\Academy.Application.dll
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\bin\Debug\net8.0\Academy.Application.pdb
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\bin\Debug\net8.0\Academy.Domain.dll
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\bin\Debug\net8.0\Academy.Domain.pdb
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\obj\Debug\net8.0\Academy.Application.csproj.AssemblyReference.cache
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\obj\Debug\net8.0\Academy.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\obj\Debug\net8.0\Academy.Application.AssemblyInfoInputs.cache
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\obj\Debug\net8.0\Academy.Application.AssemblyInfo.cs
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\obj\Debug\net8.0\Academy.Application.csproj.CoreCompileInputs.cache
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\obj\Debug\net8.0\Academy.Application.sourcelink.json
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\obj\Debug\net8.0\Academy..64877367.Up2Date
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\obj\Debug\net8.0\Academy.Application.dll
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\obj\Debug\net8.0\refint\Academy.Application.dll
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\obj\Debug\net8.0\Academy.Application.pdb
+C:\Users\nihadsasl\Desktop\Pb304Onion-master\Academy.Application\obj\Debug\net8.0\ref\Academy.Application.dll
