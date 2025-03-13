@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Academy.Application.DTOs;
+﻿using Academy.Application.DTOs;
 using Academy.Domain.Entities;
+using System.Linq.Expressions;
 
-namespace Academy.Application.Services.Contracts
+namespace Academy.Application.Services.Contracts;
+
+public interface ITeacherService
 {
-    public interface ITeacherService
-    {
-        void AddTeacher(TeacherDto createDto);
-        TeacherDto GetTeacher(Func<Teacher, bool> predicate);
-        List<TeacherDto> GetTeachers(Expression<Func<Teacher, bool>>? predicate = null);
-        void RemoveTeacher(int id);
-        void UpdateTeacher(int id, Teacher teacher);
-    }
+    TeacherDto GetTeacher(Func<Teacher, bool> predicate);
+    List<TeacherDto> GetTeachers(Expression<Func<Teacher, bool>>? predicate = null);
+    void AddTeacher(TeacherCreateDto teacher);
+    void RemoveTeacher(int id);
+    void UpdateTeacher(int id, Teacher teacher);
 }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academy.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250311165704_GroupTable")]
-    partial class GroupTable
+    [Migration("20250313171315_Nihad")]
+    partial class Nihad
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,6 +63,46 @@ namespace Academy.Infrastructure.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("Academy.Domain.Entities.Teacher", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Teachers");
+                });
+
+            modelBuilder.Entity("Academy.Domain.Entities.TeacherGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherGroups");
+                });
+
             modelBuilder.Entity("Academy.Domain.Entities.Student", b =>
                 {
                     b.HasOne("Academy.Domain.Entities.Group", "Group")
@@ -74,9 +114,35 @@ namespace Academy.Infrastructure.Migrations
                     b.Navigation("Group");
                 });
 
+            modelBuilder.Entity("Academy.Domain.Entities.TeacherGroup", b =>
+                {
+                    b.HasOne("Academy.Domain.Entities.Group", "Group")
+                        .WithMany("TeacherGroups")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Academy.Domain.Entities.Teacher", "Teacher")
+                        .WithMany("TeacherGroups")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("Teacher");
+                });
+
             modelBuilder.Entity("Academy.Domain.Entities.Group", b =>
                 {
                     b.Navigation("Students");
+
+                    b.Navigation("TeacherGroups");
+                });
+
+            modelBuilder.Entity("Academy.Domain.Entities.Teacher", b =>
+                {
+                    b.Navigation("TeacherGroups");
                 });
 #pragma warning restore 612, 618
         }

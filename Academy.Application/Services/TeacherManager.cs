@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Academy.Application.DTOs;
+using Academy.Application.Repositories;
+using Academy.Application.Services.Contracts;
+using Academy.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Academy.Application.DTOs;
-using Academy.Application.Repositories;
-using Academy.Application.Services.Contracts;
-using Academy.Domain.Entities;
 
 namespace Academy.Application.Services
 {
-    internal class TeacherManager: ITeacherService
+    public class TeacherManager : ITeacherService
     {
         private readonly ITeacherRepository _repository;
 
@@ -19,52 +19,64 @@ namespace Academy.Application.Services
         {
             _repository = repository;
         }
-        public void AddTeacher(TeacherDto createDto)
+
+        public void AddTeacher(TeacherCreateDto teacher)
         {
-            var teacher = new Teacher
+            var teacherEntity = new Teacher
             {
-                Name = createDto.Name,
-                Subject = createDto.Subject
+                Name = teacher.Name
             };
-            _repository.Add(teacher);
+            foreach (var groupId in teacher.GroupIds)
+            {
+                teacherEntity.TeacherGroups.Add(new TeacherGroup
+                {
+                    GroupId = groupId
+                });
+            }_repository.Add(teacherEntity);
         }
 
-        public TeacherDto GetTeacher(Func<Teacher, bool> predicate)
+        public TeacherDto GetTeacher(Func<Teacher, bool>? predicate = null)
         {
-            var teacher = _repository.Get(predicate);
-            var teacherDto = new TeacherDto
-            {
-                Id = teacher.Id,
-                Name = teacher.Name,
-                GroupName = teacher.Group?.Name,
-                Subject = (string)teacher.Subject
-            };
-            return teacherDto;
+            throw new NotImplementedException();
         }
 
         public List<TeacherDto> GetTeachers(Expression<Func<Teacher, bool>>? predicate = null)
         {
-            var teacherDtos = new List<TeacherDto>();
-            foreach (var item in _repository.GetAll(predicate))
+            var teachers = _repository.GetAll(predicate);
+
+            var teacherDtoList = new List<TeacherDto>();
+
+            foreach (var item in teachers)
             {
-                teacherDtos.Add(new TeacherDto
+                var teacherDto = new TeacherDto
                 {
                     Id = item.Id,
-                    Name = item.Name,
-                    GroupName = item.Group?.Name,
-                    Subject = (string)item.Subject
-                });
+                    Name = item.Name
+                };
+
+                foreach (var teacherGroup in item.TeacherGroups)
+                {
+                    teacherDto.Groups.Add(new GroupDto
+                    {
+                        Id = teacherGroup.GroupId,
+                        Name = teacherGroup.Group?.Name
+                    });
+                }
+
+                teacherDtoList.Add(teacherDto);
             }
-            return teacherDtos;
+
+            return teacherDtoList;
         }
+
         public void RemoveTeacher(int id)
         {
-            _repository.Remove(id);
+            throw new NotImplementedException();
         }
 
         public void UpdateTeacher(int id, Teacher teacher)
         {
-            _repository.Update(id, teacher);
+            throw new NotImplementedException();
         }
     }
 }

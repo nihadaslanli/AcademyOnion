@@ -68,21 +68,36 @@ namespace Academy.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Subject")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("Id");
+
+                    b.ToTable("Teachers");
+                });
+
+            modelBuilder.Entity("Academy.Domain.Entities.TeacherGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GroupId");
 
-                    b.ToTable("Teachers");
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherGroups");
                 });
 
             modelBuilder.Entity("Academy.Domain.Entities.Student", b =>
@@ -96,20 +111,35 @@ namespace Academy.Infrastructure.Migrations
                     b.Navigation("Group");
                 });
 
-            modelBuilder.Entity("Academy.Domain.Entities.Teacher", b =>
+            modelBuilder.Entity("Academy.Domain.Entities.TeacherGroup", b =>
                 {
                     b.HasOne("Academy.Domain.Entities.Group", "Group")
-                        .WithMany()
+                        .WithMany("TeacherGroups")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Academy.Domain.Entities.Teacher", "Teacher")
+                        .WithMany("TeacherGroups")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Group");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Academy.Domain.Entities.Group", b =>
                 {
                     b.Navigation("Students");
+
+                    b.Navigation("TeacherGroups");
+                });
+
+            modelBuilder.Entity("Academy.Domain.Entities.Teacher", b =>
+                {
+                    b.Navigation("TeacherGroups");
                 });
 #pragma warning restore 612, 618
         }

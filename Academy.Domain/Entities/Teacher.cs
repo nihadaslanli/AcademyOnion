@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace Academy.Domain.Entities
 {
-    public class Teacher: Entity
+    public class Teacher : Entity
     {
         public string Name { get; set; }
-
-        public int GroupId { get; set; }
-        public Group? Group { get; set; }
-        public string? Subject { get; set; }
+        public List<TeacherGroup> TeacherGroups { get; set; } = new List<TeacherGroup>();
     }
-  
 }
